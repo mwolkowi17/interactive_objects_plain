@@ -2,7 +2,7 @@
 import React, {Suspense, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 
-import { OrbitControls, MeshReflectorMaterial } from '@react-three/drei'
+import { OrbitControls, MeshReflectorMaterial, Html  } from '@react-three/drei'
 
 import {Roller1} from './Roller1'
 import {Model1} from './Model1'
@@ -22,12 +22,20 @@ import { Numbers } from './Numbers'
 
 
 export default function App() {
+  function Loader() {
+    //const { progress } = useProgress()
+    //return <Html center style={{ color: 'white' }}>{progress} % loaded</Html>
+    return <Html center style={{ color: 'black' }}>loading...</Html>
+  }
 
   return (
     
     <Canvas camera={{ fov: 75, near: 0.1, far: 80, position: [-10, 6, 30] }}>
-      <OrbitControls />
-      <Suspense fallback={null}>
+      <OrbitControls
+       maxPolarAngle={Math.PI / 2}
+       maxDistance={40}
+      />
+      <Suspense fallback={<Loader/>}>
      <ambientLight /> 
   {/*} <pointLight position={[5, 10, 20]} />*/}
       
